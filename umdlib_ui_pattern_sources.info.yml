@@ -1,0 +1,7 @@
+name: UMDLib UI Pattern Sources
+type: module
+description: UI Pattern source customizations
+package: UMDDS
+core_version_requirement: ^10.3 || ^11
+dependencies:
+- ui_patterns:ui_patterns

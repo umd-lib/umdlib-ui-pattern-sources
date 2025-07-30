@@ -1,0 +1,14 @@
+umdlib_ui_pattern_sources.date:
+  type: mapping
+  label: 'Source: Date'
+  mapping:
+    value:
+      type: date
+      label: 'Date'
+umdlib_ui_pattern_sources.format:
+  type: mapping
+  label: 'Source: Format'
+  mapping:
+    value:
+      type: string
+      label: 'Format'
