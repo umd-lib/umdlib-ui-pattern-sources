@@ -1,5 +1,5 @@
 {
-    "name": "umd-lib/umdlib-ui-pattern-sources",
+    "name": "umd-lib/umdlib_ui_pattern_sources",
     "description": "Additional UI Pattern sources maintained by the UMD Libraries.",
     "type": "drupal-module",
     "license": "Apache-2.0",
