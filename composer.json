@@ -1,0 +1,15 @@
+{
+    "name": "umd-lib/umdlib-ui-pattern-sources",
+    "description": "Additional UI Pattern sources maintained by the UMD Libraries.",
+    "type": "drupal-module",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "UMD Libraries"
+        }
+    ],
+    "require": {
+        "drupal/ui_patterns": "2.0.x-dev"
+      },
+    "minimum-stability": "beta"
+}
