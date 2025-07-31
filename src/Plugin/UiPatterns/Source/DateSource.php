@@ -70,14 +70,23 @@ class DateSource extends SourcePluginBase {
    */
   public function settingsForm(array $form, FormStateInterface $form_state): array {
     $form = parent::settingsForm($form, $form_state);
+
+    $formats = [
+      'F j, Y' => $this->t("March 10, 2001"),
+      'Y-m-d' => $this->t("2001-03-10"),
+      'Y' => $this->t("2001"),
+      'F Y' => $this->t("March 2001"),
+      'l, F j' => $this->t("Saturday, March 10")
+    ];
+
     $form['date'] = [
       '#type' => 'date',
       '#default_value' => $this->getSetting('date'),
     ];
     $form['format'] = [
-      '#type' => 'textfield',
+      '#type' => 'select',
+      '#options' => $formats,
       '#default_value' => $this->getSetting('format'),
-      '#description' => $this->t('See <a href="https://www.php.net/manual/en/datetime.format.php" target="_blank">PHP Date</a> for formats')
     ];
     return $form;
   }
