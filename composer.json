@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "drupal/ui_patterns": "2.0.x-dev"
+        "drupal/ui_patterns": "2.0.x-dev@dev"
       },
     "minimum-stability": "beta"
 }

@@ -12,3 +12,18 @@ umdlib_ui_pattern_sources.format:
     value:
       type: string
       label: 'Format'
+
+umdlib_ui_pattern_sources.search_endpoint:
+  type: mapping
+  label: 'Source: Search Endpoint'
+  mapping:
+    value:
+      type: string
+      label: 'Endpoint'
+umdlib_ui_pattern_sources.search_facet:
+  type: mapping
+  label: 'Source: Search Facet'
+  mapping:
+    value:
+      type: string
+      label: 'Facet'

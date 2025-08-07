@@ -23,6 +23,23 @@ Select a date using the calendar widget and a format from _Format_ dropdown.
 
 Save the block, and the date and format should be reflected on the page.
 
+### Facet
+
+Configured facets for a selected endpoint.
+
+Intended for Search Web Components integrations.
+
+#### Usage
+
+> [!WARNING]
+> Unstable feature
+
+Create a facet for a decoupled endpoint.
+
+In layouts, add a UI Patterns UMD Search Web Component facet widget.
+
+Use the _Facet_ source for populating any _Facet_ slot.
+
 ## Installation
 
 ```bash
