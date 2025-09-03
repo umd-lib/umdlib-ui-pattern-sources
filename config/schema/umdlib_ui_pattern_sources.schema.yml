@@ -13,6 +13,14 @@ umdlib_ui_pattern_sources.format:
       type: string
       label: 'Format'
 
+umdlib_ui_pattern_sources.long_text_string:
+  type: mapping
+  label: 'Source: Text String'
+  mapping:
+    value:
+      type: string
+      label: 'Format'
+
 umdlib_ui_pattern_sources.search_endpoint:
   type: mapping
   label: 'Source: Search Endpoint'
