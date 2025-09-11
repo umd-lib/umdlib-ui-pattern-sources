@@ -70,6 +70,7 @@ class DateSource extends SourcePluginBase {
    */
   public function settingsForm(array $form, FormStateInterface $form_state): array {
     $form = parent::settingsForm($form, $form_state);
+    $prop_def = $this->propDefinition;
 
     $formats = [
       'F j, Y' => $this->t("March 10, 2001"),
@@ -80,10 +81,12 @@ class DateSource extends SourcePluginBase {
     ];
 
     $form['date'] = [
+      '#title' => !empty($prop_def['title']) ? $prop_def['title'] : $this->t('Long Text'),
       '#type' => 'date',
       '#default_value' => $this->getSetting('date'),
     ];
     $form['format'] = [
+      '#title' => $this->t('Date Format'),
       '#type' => 'select',
       '#options' => $formats,
       '#default_value' => $this->getSetting('format'),

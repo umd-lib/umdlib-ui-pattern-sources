@@ -20,9 +20,17 @@ use Drupal\Core\Render\Markup;
   id: 'long_text_string',
   label: new TranslatableMarkup('Text String'),
   description: new TranslatableMarkup('For non-WYSIWYG plain text strings.'),
-  prop_types: ['slot', 'string']
+  prop_types: ['slot', 'string', 'url']
 )]
 class LongTextString extends SourcePluginBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
+    $plugin = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    return $plugin;
+  }
 
   /**
    * {@inheritdoc}
@@ -62,9 +70,11 @@ class LongTextString extends SourcePluginBase {
    * {@inheritdoc}
    */
   public function settingsForm(array $form, FormStateInterface $form_state): array {
+    $prop_def = $this->propDefinition;
     $form = parent::settingsForm($form, $form_state);
 
     $form['long_text_string'] = [
+      '#title' => !empty($prop_def['title']) ? $prop_def['title'] : $this->t('Long Text'),
       '#type' => 'textarea',
       '#default_value' => $this->getSetting('long_text_string'),
     ];
