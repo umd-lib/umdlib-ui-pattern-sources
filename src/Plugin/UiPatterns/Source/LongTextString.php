@@ -11,28 +11,33 @@ use Drupal\ui_patterns\Attribute\Source;
 use Drupal\ui_patterns\SourcePluginBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Render\BubbleableMetadata;
-use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
 use Drupal\Core\Render\Markup;
-use DateTimeImmutable;
 
 /**
  * Plugin implementation of the source.
  */
 #[Source(
-  id: 'date',
-  label: new TranslatableMarkup('Date'),
-  description: new TranslatableMarkup('Date field supporting PHP formats'),
-  prop_types: ['slot', 'string']
+  id: 'long_text_string',
+  label: new TranslatableMarkup('Text String'),
+  description: new TranslatableMarkup('For non-WYSIWYG plain text strings.'),
+  prop_types: ['slot', 'string', 'url']
 )]
-class DateSource extends SourcePluginBase {
+class LongTextString extends SourcePluginBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
+    $plugin = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    return $plugin;
+  }
 
   /**
    * {@inheritdoc}
    */
   public function defaultSettings(): array {
     return [
-      'date' => "",
-      'format' => "F d, Y",
+      'long_text_string' => "",
     ];
   }
 
@@ -40,56 +45,38 @@ class DateSource extends SourcePluginBase {
    * {@inheritdoc}
    */
   public function getPropValue(): mixed {
-    $date = $this->getSetting('date') ?? null;
-    $format = $this->getSetting('format') ?? "F d, Y";
-    if (empty($date)) {
+    $long_text_string = $this->getSetting('long_text_string') ?? null;
+    if (empty($long_text_string)) {
       return null;
     }
     $isSlot = ($this->propDefinition["ui_patterns"]["type_definition"]->getPluginId() === "slot");
 
-    // return $isSlot ? [] : "";
 
-    if (empty($date) || !is_scalar($date)) {
+    if (empty($long_text_string) || !is_scalar($long_text_string)) {
       return $isSlot ? [] : "";
     }
-    $dt = new DateTimeImmutable($date);
-    $formatted_date = $dt->format($format);
     if ($isSlot) {
       $bubbleable_metadata = new BubbleableMetadata();
       $build = [
-        "#markup" => Markup::create($formatted_date),
+        "#markup" => Markup::create($long_text_string),
       ];
       $bubbleable_metadata->applyTo($build);
       return $build;
     }
-    return Html::escape($formatted_date);
+    return Html::escape($long_text_string);
   }
 
   /**
    * {@inheritdoc}
    */
   public function settingsForm(array $form, FormStateInterface $form_state): array {
-    $form = parent::settingsForm($form, $form_state);
     $prop_def = $this->propDefinition;
+    $form = parent::settingsForm($form, $form_state);
 
-    $formats = [
-      'F j, Y' => $this->t("March 10, 2001"),
-      'Y-m-d' => $this->t("2001-03-10"),
-      'Y' => $this->t("2001"),
-      'F Y' => $this->t("March 2001"),
-      'l, F j' => $this->t("Saturday, March 10")
-    ];
-
-    $form['date'] = [
+    $form['long_text_string'] = [
       '#title' => !empty($prop_def['title']) ? $prop_def['title'] : $this->t('Long Text'),
-      '#type' => 'date',
-      '#default_value' => $this->getSetting('date'),
-    ];
-    $form['format'] = [
-      '#title' => $this->t('Date Format'),
-      '#type' => 'select',
-      '#options' => $formats,
-      '#default_value' => $this->getSetting('format'),
+      '#type' => 'textarea',
+      '#default_value' => $this->getSetting('long_text_string'),
     ];
     return $form;
   }
@@ -98,11 +85,11 @@ class DateSource extends SourcePluginBase {
    * {@inheritdoc}
    */
   public function settingsSummary(): array {
-    if (empty($this->getSetting('date'))) {
+    if (empty($this->getSetting('long_text_string'))) {
       return [];
     }
     return [
-      $this->getSetting('date'),
+      $this->getSetting('long_text_string'),
     ];
   }
 }

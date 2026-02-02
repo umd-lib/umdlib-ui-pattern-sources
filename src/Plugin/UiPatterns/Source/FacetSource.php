@@ -51,52 +51,11 @@ class FacetSource extends SourcePluginBase implements ContainerFactoryPluginInte
   /**
    * {@inheritdoc}
    */
-  public static function create(
-    ContainerInterface $container,
-    array $configuration,
-    $plugin_id,
-    $plugin_definition,
-  ) {
-    return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get('plugin.manager.ui_patterns_prop_type'),
-      $container->get('context.repository'),
-      $container->get('current_route_match'),
-      $container->get('ui_patterns.sample_entity_generator'),
-      $container->get('module_handler'),
-      $container->get('entity_type.manager'),
-    );
-  }
-
-  /**
-   * Constructs a \ui_patterns\SourcePluginBase object.
-   *
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
-   *   The entity type manager.
-   */
-  public function __construct(
-    array $configuration,
-    $plugin_id,
-    $plugin_definition,
-    protected PropTypePluginManager $propTypeManager,
-    protected ContextRepositoryInterface $contextRepository,
-    protected RouteMatchInterface $routeMatch,
-    protected SampleEntityGeneratorInterface $sampleEntityGenerator,
-    protected ModuleHandlerInterface $moduleHandler,
-    protected EntityTypeManagerInterface $entityManager
-  ) {
-    parent::__construct($configuration,
-      $plugin_id,
-      $plugin_definition,
-      $propTypeManager,
-      $contextRepository,
-      $routeMatch,
-      $sampleEntityGenerator,
-      $moduleHandler);
-    $this->entity_type_manager = $entityManager;
-    $this->module_handler = $moduleHandler;
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): static {
+    $plugin = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    $plugin->entity_type_manager = $container->get('entity_type.manager');
+    $plugin->module_handler = $container->get('module_handler');
+    return $plugin;
   }
 
   /**
