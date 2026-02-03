@@ -3,6 +3,10 @@
 A collection of custom UI Pattern sources maintained by the
 UMD Libraries.
 
+Stable version: 1.0.0
+
+Development version: 2.x
+
 ## Currently maintained sources
 
 ### Date
