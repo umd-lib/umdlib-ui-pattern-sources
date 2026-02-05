@@ -3,9 +3,11 @@
 A collection of custom UI Pattern sources maintained by the
 UMD Libraries.
 
-Stable version: 1.0.0
+Stable version: 1.0.0 (main)
 
 Development version: 2.x
+
+[UMD Libraries Drupal Versioning Information](https://github.com/umd-lib/umd-drupal-core/tree/main)
 
 ## Currently maintained sources
 
